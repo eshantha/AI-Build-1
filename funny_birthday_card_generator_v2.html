@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎉 Birthday Card Magic 🎂</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f472b6, #60a5fa, #34d399);
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: white;
+      max-width: 520px;
+      width: 100%;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '🎈🎂🎉';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 3rem;
+      opacity: 0.15;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 26px;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.05rem;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    }
+    button:hover {
+      background: #4338ca;
+    }
+    .output {
+      margin-top: 26px;
+      padding: 22px;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-radius: 14px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      border: 2px dashed #f59e0b;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎉 Birthday Card Magic 🎂</h1>
+    <p style="margin-top:-10px;color:#475569">Instantly generate funny birthday messages</p>
+
+    <label>Name</label>
+    <input id="name" placeholder="e.g. Sam" />
+
+    <label>Age</label>
+    <input id="age" type="number" placeholder="e.g. 35" />
+
+    <label>Hobby</label>
+    <input id="hobby" placeholder="e.g. running, gaming, cooking" />
+
+    <button onclick="generateMessage()">Generate Message</button>
+
+    <div id="output" class="output" style="display:none"></div>
+  </div>
+
+  <script>
+    function generateMessage() {
+      const name = document.getElementById('name').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const hobby = document.getElementById('hobby').value.trim();
+      const output = document.getElementById('output');
+
+      if (!name || !age || !hobby) {
+        output.style.display = 'block';
+        output.textContent = 'Please fill in all fields — even legends need details.';
+        return;
+      }
+
+      const jokes = [
+        `Happy ${age}th Birthday, ${name}! At this age, your knees make more noise than your phone — but at least you’re still elite at ${hobby}.`,
+        `${name}, congratulations on turning ${age}! You’ve officially reached the age where ${hobby} counts as “exercise” and “a personality.”`,
+        `Happy Birthday ${name}! ${age} years young and still obsessed with ${hobby}. Doctors call it dedication. Friends call it worrying.`,
+        `${age} looks good on you, ${name}. Probably because you spend so much time doing ${hobby} instead of acting your age.`,
+        `Happy ${age}th, ${name}! May your love for ${hobby} stay strong — unlike your memory of why you walked into a room.`
+      ];
+
+      const message = jokes[Math.floor(Math.random() * jokes.length)];
+      output.style.display = 'block';
+      output.textContent = message;
+    }
+  </script>
+</body>
+</html>
