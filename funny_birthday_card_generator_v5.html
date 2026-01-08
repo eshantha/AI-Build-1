@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>☁️ Sky Blue Birthday Card Studio ☁️</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #e0f2fe, #bae6fd, #7dd3fc);
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .page-title {
+      text-align: center;
+      font-family: 'Georgia', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #0c4a6e;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #0369a1;
+      margin-bottom: 46px;
+      font-size: 1.15rem;
+      font-style: italic;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* LEFT: FORM */
+    .form-card {
+      background: white;
+      padding: 34px;
+      border-radius: 22px;
+      box-shadow: 0 20px 40px rgba(2, 132, 199, 0.25);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: #075985;
+      font-family: 'Georgia', serif;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+      color: #0c4a6e;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid #bae6fd;
+      font-size: 1rem;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 14px;
+      font-size: 1.05rem;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      color: white;
+    }
+
+    .lucky-btn {
+      background: linear-gradient(135deg, #7dd3fc, #0ea5e9);
+      color: white;
+    }
+
+    /* RIGHT: CARD STACK */
+    .card-preview {
+      perspective: 1200px;
+    }
+
+    .card-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+
+    .card-book {
+      display: flex;
+      width: 460px;
+      height: 330px;
+      box-shadow: 0 24px 50px rgba(2, 132, 199, 0.35);
+      border-radius: 16px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .card-page {
+      width: 50%;
+      padding: 26px;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-align: center;
+      font-family: 'Georgia', serif;
+    }
+
+    .card-inside {
+      background: #f0f9ff;
+      font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #0c4a6e;
+      box-shadow: inset 4px 0 0 rgba(2, 132, 199, 0.15);
+      position: relative;
+    }
+
+    .card-inside::before {
+      content: "Happy Birthday!";
+      display: block;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .copy-btn {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      border-radius: 10px;
+      background: #0284c7;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .placeholder {
+      opacity: 0.5;
+      font-style: italic;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .card-book {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">☁️ Birthday Card Studio ☁️</div>
+  <div class="subtitle">Craft sky‑blue birthday magic with words</div>
+
+  <div class="layout">
+
+    <!-- LEFT SIDE: FORM -->
+    <div class="form-card">
+      <h2>Create your card</h2>
+
+      <label>Name</label>
+      <input id="name" placeholder="e.g. Sam" />
+
+      <label>Age</label>
+      <input id="age" type="number" placeholder="e.g. 35" />
+
+      <label>Hobby</label>
+      <input id="hobby" placeholder="e.g. running" />
+
+      <label>Adjective</label>
+      <input id="adjective" placeholder="e.g. legendary, chaotic" />
+
+      <label>Plural Noun</label>
+      <input id="plural" placeholder="e.g. socks, spreadsheets" />
+
+      <div class="button-row">
+        <button class="primary-btn" onclick="generateMessage()">Generate Card</button>
+        <button class="lucky-btn" onclick="feelingLucky()">🍀 I'm Feeling Lucky</button>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: CARD STACK -->
+    <div class="card-preview">
+      <div class="card-stack" id="cardStack">
+        <div class="card-book">
+          <div class="card-page card-front">🎂<br/>Happy Birthday</div>
+          <div class="card-page card-inside">
+            <div class="placeholder">Your first card will appear here…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const randomData = {
+      names: ['Dave', 'Karen', 'Steve', 'Linda', 'Gary', 'Susan'],
+      hobbies: ['competitive napping', 'extreme couponing', 'yelling at the TV', 'pretending to run', 'overwatering plants'],
+      adjectives: ['legendary', 'chaotic', 'questionable', 'mildly impressive', 'unreasonably confident'],
+      plurals: ['socks', 'emails', 'spreadsheets', 'life choices', 'group chats'],
+      ages: Array.from({ length: 50 }, (_, i) => i + 18)
+    };
+
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function feelingLucky() {
+      document.getElementById('name').value = pick(randomData.names);
+      document.getElementById('age').value = pick(randomData.ages);
+      document.getElementById('hobby').value = pick(randomData.hobbies);
+      document.getElementById('adjective').value = pick(randomData.adjectives);
+      document.getElementById('plural').value = pick(randomData.plurals);
+    }
+
+    function generateMessage() {
+      const name = document.getElementById('name').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const hobby = document.getElementById('hobby').value.trim();
+      const adjective = document.getElementById('adjective').value.trim();
+      const plural = document.getElementById('plural').value.trim();
+      const cardStack = document.getElementById('cardStack');
+
+      if (!name || !age || !hobby || !adjective || !plural) return;
+
+      const jokes = [
+        `Happy ${age}th Birthday, ${name}! May your day be as ${adjective} as your love for ${hobby}, and may you receive fewer ${plural} than last year.`,
+        `${name}, ${age} years old and still wildly ${adjective}. Celebrate with ${hobby} and try not to trip over any ${plural}.`,
+        `Another year older, ${name}! Stay ${adjective}, keep enjoying ${hobby}, and remember: you’re aging better than most ${plural}.`,
+        `Happy Birthday ${name}! At ${age}, you’ve mastered ${hobby} and the art of avoiding ${plural}. Truly ${adjective}.`,
+        `${name}, turning ${age} means it’s time for ${adjective} celebrations, questionable ${hobby} decisions, and absolutely zero ${plural}.`
+      ];
+
+      const message = jokes[Math.floor(Math.random() * jokes.length)];
+
+      const card = document.createElement('div');
+      card.className = 'card-book';
+      card.innerHTML = `
+        <div class="card-page card-front">🎂<br/>Happy Birthday</div>
+        <div class="card-page card-inside">
+          ${message}
+          <button class="copy-btn" onclick="navigator.clipboard.writeText('${message.replace(/'/g, "\'")}')">📋 Copy</button>
+        </div>
+      `;
+
+      cardStack.prepend(card);
+    }
+  </script>
+
+</body>
+</html>
