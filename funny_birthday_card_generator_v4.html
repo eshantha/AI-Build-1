@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎉 Birthday Card Factory 🎂</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f472b6, #60a5fa, #34d399);
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 10px;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #f8fafc;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* LEFT: FORM */
+    .form-card {
+      background: white;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 26px;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.05rem;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    /* RIGHT: CARD PREVIEW */
+    .card-preview {
+      perspective: 1200px;
+    }
+
+    .card-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .card-book {
+      display: flex;
+      width: 440px;
+      height: 320px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .card-page {
+      width: 50%;
+      padding: 24px;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #fb7185, #f97316);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .card-inside {
+      background: #fff7ed;
+      font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #1f2937;
+      box-shadow: inset 4px 0 0 rgba(0,0,0,0.05);
+    }
+
+    .card-inside::before {
+      content: "Happy Birthday!";
+      display: block;
+      font-weight: 700;
+      color: #ea580c;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .placeholder {
+      opacity: 0.5;
+      font-style: italic;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .card-book {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">🎉 Birthday Card Factory 🎂</div>
+  <div class="subtitle">Generate funny birthday cards and keep the classics</div>
+
+  <div class="layout">
+
+    <!-- LEFT SIDE: FORM -->
+    <div class="form-card">
+      <h2>Create a new card</h2>
+
+      <label>Name</label>
+      <input id="name" placeholder="e.g. Sam" />
+
+      <label>Age</label>
+      <input id="age" type="number" placeholder="e.g. 35" />
+
+      <label>Hobby</label>
+      <input id="hobby" placeholder="e.g. running, gaming, cooking" />
+
+      <button onclick="generateMessage()">Generate Card</button>
+    </div>
+
+    <!-- RIGHT SIDE: CARD STACK -->
+    <div class="card-preview">
+      <div class="card-stack" id="cardStack">
+        <div class="card-book">
+          <div class="card-page card-front">🎂<br/>Happy Birthday</div>
+          <div class="card-page card-inside">
+            <div class="placeholder">Your first card will appear here…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function generateMessage() {
+      const name = document.getElementById('name').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const hobby = document.getElementById('hobby').value.trim();
+      const cardStack = document.getElementById('cardStack');
+
+      if (!name || !age || !hobby) return;
+
+      const jokes = [
+        `Happy ${age}th Birthday, ${name}! At this age, your knees make more noise than your phone — but at least you’re still elite at ${hobby}.`,
+        `${name}, congratulations on turning ${age}! You’ve officially reached the age where ${hobby} counts as “exercise” and “a personality.”`,
+        `Happy Birthday ${name}! ${age} years young and still obsessed with ${hobby}. Doctors call it dedication. Friends call it worrying.`,
+        `${age} looks good on you, ${name}. Probably because you spend so much time doing ${hobby} instead of acting your age.`,
+        `Happy ${age}th, ${name}! May your love for ${hobby} stay strong — unlike your memory of why you walked into a room.`
+      ];
+
+      const message = jokes[Math.floor(Math.random() * jokes.length)];
+
+      const card = document.createElement('div');
+      card.className = 'card-book';
+      card.innerHTML = `
+        <div class="card-page card-front">🎂<br/>Happy Birthday</div>
+        <div class="card-page card-inside">${message}</div>
+      `;
+
+      cardStack.prepend(card);
+    }
+  </script>
+
+</body>
+</html>
