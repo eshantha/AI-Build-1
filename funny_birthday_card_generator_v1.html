@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funny Birthday Card Generator</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f7f7fb;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 24px;
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      background: #4f46e5;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #4338ca;
+    }
+    .output {
+      margin-top: 24px;
+      padding: 20px;
+      background: #f1f5f9;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎂 Funny Birthday Card Generator</h1>
+
+    <label>Name</label>
+    <input id="name" placeholder="e.g. Sam" />
+
+    <label>Age</label>
+    <input id="age" type="number" placeholder="e.g. 35" />
+
+    <label>Hobby</label>
+    <input id="hobby" placeholder="e.g. running, gaming, cooking" />
+
+    <button onclick="generateMessage()">Generate Message</button>
+
+    <div id="output" class="output" style="display:none"></div>
+  </div>
+
+  <script>
+    function generateMessage() {
+      const name = document.getElementById('name').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const hobby = document.getElementById('hobby').value.trim();
+      const output = document.getElementById('output');
+
+      if (!name || !age || !hobby) {
+        output.style.display = 'block';
+        output.textContent = 'Please fill in all fields — even legends need details.';
+        return;
+      }
+
+      const jokes = [
+        `Happy ${age}th Birthday, ${name}! At this age, your knees make more noise than your phone — but at least you’re still elite at ${hobby}.`,
+        `${name}, congratulations on turning ${age}! You’ve officially reached the age where ${hobby} counts as “exercise” and “a personality.”`,
+        `Happy Birthday ${name}! ${age} years young and still obsessed with ${hobby}. Doctors call it dedication. Friends call it worrying.`,
+        `${age} looks good on you, ${name}. Probably because you spend so much time doing ${hobby} instead of acting your age.`,
+        `Happy ${age}th, ${name}! May your love for ${hobby} stay strong — unlike your memory of why you walked into a room.`
+      ];
+
+      const message = jokes[Math.floor(Math.random() * jokes.length)];
+      output.style.display = 'block';
+      output.textContent = message;
+    }
+  </script>
+</body>
+</html>
